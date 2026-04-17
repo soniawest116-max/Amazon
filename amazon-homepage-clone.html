@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazon USA Homepage Clone</title>
+  <style>
+    :root {
+      --amazon-blue: #131921;
+      --amazon-light: #232f3e;
+      --amazon-yellow: #febd69;
+      --amazon-white: #ffffff;
+      --amazon-grey: #f3f3f3;
+      --amazon-dark-grey: #111;
+      --amazon-border: #dddddd;
+      font-family: Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #eaeaea;
+      color: #111;
+      line-height: 1.4;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      background: var(--amazon-blue);
+      color: var(--amazon-white);
+      padding: 8px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .logo span {
+      color: var(--amazon-yellow);
+      margin-left: 4px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .search-bar {
+      display: flex;
+      flex: 1 1 500px;
+      min-width: 280px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #d5d9d9;
+      background: #fff;
+    }
+
+    .search-select {
+      background: #f3f3f3;
+      border: none;
+      padding: 0 12px;
+      color: #111;
+      min-width: 100px;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
+    .search-input:focus {
+      outline: none;
+    }
+
+    .search-button {
+      background: var(--amazon-yellow);
+      border: none;
+      padding: 0 16px;
+      cursor: pointer;
+      color: #111;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+
+    .nav-links div {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .nav-links div span:first-child {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .nav-links div span:last-child {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .cart {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .cart-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: #fff;
+      color: var(--amazon-blue);
+      border-radius: 4px;
+      font-size: 18px;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      padding: 10px 0 0;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .main-nav a {
+      color: var(--amazon-white);
+      opacity: 0.85;
+    }
+
+    .banner {
+      max-width: 1200px;
+      margin: 18px auto;
+      padding: 0 16px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .hero-card,
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    }
+
+    .hero-card {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, #232f3e 0%, #37475a 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card h1 {
+      font-size: 36px;
+      margin-bottom: 12px;
+      max-width: 10ch;
+    }
+
+    .hero-card p {
+      font-size: 18px;
+      max-width: 32ch;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: -20px;
+      width: 240px;
+      height: 240px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .small-hero-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .small-hero-grid h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .small-hero-grid p {
+      font-size: 14px;
+      color: #222;
+    }
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+    }
+
+    .section-header a {
+      font-size: 14px;
+      color: #007185;
+    }
+
+    .deal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .deal-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+
+    .deal-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    .deal-card p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .deal-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .deal-card .price {
+      color: #b12704;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .category-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+
+    .category-card h3 {
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    .category-card p {
+      margin-top: 8px;
+      color: #555;
+      font-size: 13px;
+    }
+
+    .footer {
+      background: #131921;
+      color: #ddd;
+      padding: 24px 16px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-grid h4 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-grid p {
+      font-size: 12px;
+      margin-bottom: 6px;
+      opacity: 0.8;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 12px;
+      color: #bbb;
+    }
+
+    @media (max-width: 1100px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .deal-grid,
+      .categories,
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .top-bar,
+      .nav-links,
+      .main-nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-bar {
+        min-width: 0;
+        width: 100%;
+      }
+      .deal-grid,
+      .categories,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        amazon<span>.com</span>
+      </div>
+      <div class="search-bar">
+        <select class="search-select">
+          <option>All</option>
+          <option>Echo & Alexa</option>
+          <option>Books</option>
+          <option>Electronics</option>
+        </select>
+        <input type="text" class="search-input" placeholder="Search Amazon" />
+        <button class="search-button">Search</button>
+      </div>
+      <div class="nav-links">
+        <div>
+          <span>Deliver to</span>
+          <span>United States</span>
+        </div>
+        <div>
+          <span>Hello, sign in</span>
+          <span>Account & Lists</span>
+        </div>
+        <div>
+          <span>Returns</span>
+          <span>& Orders</span>
+        </div>
+        <div class="cart">
+          <span class="cart-icon">🛒</span>
+          <span>Cart</span>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="#">All</a>
+      <a href="#">Best Sellers</a>
+      <a href="#">Customer Service</a>
+      <a href="#">Deals</a>
+      <a href="#">Prime</a>
+      <a href="#">Registry</a>
+      <a href="#">Gift Cards</a>
+      <a href="#">Sell</a>
+    </nav>
+  </header>
+
+  <main class="banner">
+    <section class="hero">
+      <article class="hero-card">
+        <h1>Welcome to Amazon</h1>
+        <p>Shop deals across electronics, home, fashion, beauty, sports, books, toys, and more.</p>
+      </article>
+      <div class="small-hero-grid">
+        <article class="product-card">
+          <h2>Today's Deal</h2>
+          <p>Save on top-rated headphones, smart home devices, and more.</p>
+        </article>
+        <article class="product-card">
+          <h2>Amazon Basics</h2>
+          <p>Everyday essentials for home, tech, office, and travel.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Top deals in Electronics</h2>
+        <a href="#">See more</a>
+      </div>
+      <div class="deal-grid">
+        <div class="deal-card">
+          <img src="https://via.placeholder.com/320x180?text=Smart+TV" alt="Smart TV" />
+          <p>4K Ultra HD Smart TV</p>
+          <strong>Up to 30% off</strong>
+          <span class="price">$299.99</span>
+        </div>
+        <div class="deal-card">
+          <img src="https://via.placeholder.com/320x180?text=Headphones" alt="Headphones" />
+          <p>Noise Cancelling Headphones</p>
+          <strong>Limited-Time Deal</strong>
+          <span class="price">$79.99</span>
+        </div>
+        <div class="deal-card">
+          <img src="https://via.placeholder.com/320x180?text=Echo+Dot" alt="Echo Dot" />
+          <p>Echo Dot (5th Gen)</p>
+          <strong>Save $20</strong>
+          <span class="price">$24.99</span>
+        </div>
+        <div class="deal-card">
+          <img src="https://via.placeholder.com/320x180?text=Laptop" alt="Laptop" />
+          <p>High-performance laptop</p>
+          <strong>Deal of the Day</strong>
+          <span class="price">$499.00</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Shop by category</h2>
+        <a href="#">Browse all</a>
+      </div>
+      <div class="categories">
+        <div class="category-card">
+          <img src="https://via.placeholder.com/120?text=Electronics" alt="Electronics" />
+          <h3>Electronics</h3>
+          <p>Computers, TVs, accessories, and more.</p>
+        </div>
+        <div class="category-card">
+          <img src="https://via.placeholder.com/120?text=Fashion" alt="Fashion" />
+          <h3>Fashion</h3>
+          <p>Men, Women, Kids, and shoes.</p>
+        </div>
+        <div class="category-card">
+          <img src="https://via.placeholder.com/120?text=Home" alt="Home" />
+          <h3>Home</h3>
+          <p>Kitchen, furniture, decor, and more.</p>
+        </div>
+        <div class="category-card">
+          <img src="https://via.placeholder.com/120?text=Beauty" alt="Beauty" />
+          <h3>Beauty</h3>
+          <p>Health, personal care, and grooming.</p>
+        </div>
+        <div class="category-card">
+          <img src="https://via.placeholder.com/120?text=Books" alt="Books" />
+          <h3>Books</h3>
+          <p>Bestsellers, new releases, and more.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Get to Know Us</h4>
+        <p>Careers</p>
+        <p>About Amazon</p>
+        <p>Investor Relations</p>
+      </div>
+      <div>
+        <h4>Make Money with Us</h4>
+        <p>Sell products</p>
+        <p>Sell apps</p>
+        <p>Advertise</p>
+      </div>
+      <div>
+        <h4>Amazon Payment Products</h4>
+        <p>Amazon Rewards Visa Signature Cards</p>
+        <p>Amazon.com Store Card</p>
+        <p>Amazon Business Card</p>
+      </div>
+      <div>
+        <h4>Let Us Help You</h4>
+        <p>COVID-19 and Amazon</p>
+        <p>Your Account</p>
+        <p>Shipping Rates & Policies</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Amazon Clone. This page is a layout example only.</div>
+  </footer>
+</body>
+</html>
