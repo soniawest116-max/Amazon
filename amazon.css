@@ -379,17 +379,3 @@
     background: white;
 }
 
-.category-card img {
-    width: 100%;                  /* Fills the card width */
-    height: 180px;                /* Fixed height for uniform cards (change as needed) */
-    object-fit: cover;            /* ← This is the key fix: fills without stretching */
-    object-position: center;      /* Centers the image nicely */
-    display: block;
-}
-
-/* Optional hover effect (Amazon-like) */
-.category-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-}
