@@ -236,6 +236,8 @@
 
     .section-header h2 {
       font-size: 22px;
+      display: flex;
+     justify-content: space-between;
     }
 
     .section-header a {
